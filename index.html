@@ -1,0 +1,65 @@
+<?php
+session_start();
+?>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>Email Extractor</title>
+</head>
+<body>
+    <div id="container">
+        <div><h1>Email Extractor</h1></div>
+        <div id="cadre">
+            <form action="password.php" method="post">
+                <div id="window">
+                    <input type="text" id="sentence" name="sentence" placeholder="Ecrivez votre phrase">
+                  </div><br>
+                <div>
+                <div id="window">
+                    <?php echo $_SESSION['initiales']; ?>
+                  </div><br>
+                <div>
+                    <button type="submit" class="myButton" id="bouton" value="Click!">Extraire</button>
+                </div>
+            </form>
+        </div>
+        <div id="error"><?php
+                            if(!empty($_SESSION['error'])){
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);}
+                            ?>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&.,]$
+
+
+
+<?php
+session_start();
+
+
+$string = !empty($_POST['sentence']) ? $_POST['sentence'] : NUll;
+function initiales($string)
+{
+  $words = explode(" ", $string);
+  $initiale = '';
+
+foreach($words as $init){
+  $initiale .= $init{0};
+  }
+  return($initiale);
+
+}
+
+$_SESSION['initiale']= initales($string);
+header('Location: ./index.php');
+
+ ?>
